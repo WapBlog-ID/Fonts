@@ -117,9 +117,11 @@
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'/>
 
-<script>var __WB = $(document), __aX = window.location.pathname.substring(1);
+<script>var __WB = $(document), __aX = window.location.pathname.substring(1), __icon = {"new":["New",["landscape","potrait","comments","comments-alt","desktop","forum","forum-thread","mail","mobile","new-thread","new-thread-alt","tablet","alarm","calendar","schedule","dark","grid-layout","light","list-layout","scale-tools","thumbnail","camera","dashboard","globe","hdd","home","live","microchip","compress","exit-fullscreen","expand","fullscreen","video","key","box","store","trolley","info","pin","pin-map","power-off","signal","version","warning","column","rows","write","wapblog-store"]],"action":["Action",["ban","download","filter","gear","keyboard","landscape","new-tab","potrait","recovery","redo","redo-alt","reply","reply-all","search","search-minus","search-plus","send","share","share-alt","sync","toggle-off","toggle-on","trash","undo","undo-all","undo-alt","upload"]],"brand":["Brand",["adobe-illustrator","chrome","cloudflare","facebook","github","google","google-play","icomoon","iconfinder","instagram","twitter","wapblog","youtube"]],"chart":["Chart",["chart","chart-alt","poll","poll-down"]],"communication":["Communication",["bell","bubble-chat","chat","comment","comment-alt","comments","comments-alt","desktop","envelope","envelope-open","forum","forum-thread","inbox","language","mail","mobile","new-thread","new-thread-alt","sitemap","tablet"]],"date-and-time":["Date and Time",["alarm","calendar","schedule"]],"design":["Design",["anchor-point","dark","eraser","grid-layout","layers","layers-alt","layout","light","list-layout","paint-bucket","scale-tools","selection-tool","stack","thumbnail"]],"direction":["Direction",["angle-bottom-left","angle-bottom-right","angle-double-down","angle-double-left","angle-double-right","angle-double-up","angle-down","angle-left","angle-right","angle-up","arrow-bottom-left","arrow-bottom-right","arrow-down","arrow-left","arrow-right","arrow-top-left","arrow-top-right","arrow-up","angle-top-left","angle-top-right","caret-down","caret-left","caret-right","caret-up","cross-roads","cross-roads-alt","exchange"]],"media":["Media",["apps","archive","article","blog","camera","cloud","cookie","code","dashboard","folder","globe","hdd","home","id-card","image","invoice","microchip","paper-clip","rss","save","server","site","site-builder","support","support-alt","terminal","video-camera"]],"menu":["Menu",["bars","bars-1","bars-2","bars-3","bars-4","bars-5","bars-6"]],"music-and-video":["Music and Video",["compress","exit-fullscreen","expand","fullscreen","live","music","next","pause","picture-in-picture","play","previous","repeat","repeat-one","sliders","sliders-alt","stop","stream","tone","video"]],"secure":["Secure",["key","lock","shield","shield-alt","shield-left","shield-right","unlock"]],"shopping":["Shopping",["box","store","trolley"]],"sign":["Sign",["certificate","check","circle","circle-alt","double-check","emot","eye","eye-slash","female","info","intersex","male","medal","minus","more","more-v","pin","pin-map","plus","power-off","question","sign-in","sign-out","signal","star","star-full","star-half","tag","tags","times","version","warning"]],"spinner":["Spinner",["spinner","spinner-1","spinner-2","spinner-3"]],"texteditor":["Text Editor",["align-center","align-justify","align-left","align-right","bold","clipboard","column","copy","edit","font","grid","italic","new-document","link","list-box","list-circle","pages","paragraft","rows","strikethrough","table","underline","unlink","write"]],"user":["User",["user","user-alt","users","user-plus","user-plus-alt","user-secret"]],"wapblog":["WapBlog",["wapblog-chat","wapblog-icon","wapblog-shield","wapblog-store","wapblog-template"]]}, __iconGroup = ["new","action","brand","chart","communication","date-and-time","design","direction","media","menu","music-and-video","secure","shopping","sign","spinner","texteditor","user","wapblog"];
+
 __WB.ready(function(){
 	AX();
+	wbIcons();
 	__WB.on('click', 'a.nv-menu[data-menu]', function(){
 		var a = $(this).attr('data-menu');
 		if($('ul.menu-'+a).hasClass('menu-active')){
@@ -129,6 +131,63 @@ __WB.ready(function(){
 		}
 	}).on('click', 'a.close-nav', function(){
 		$('ul.menu-main, ul.menu-user').removeClass('menu-active');
+	}).on('click', 'a[href]', function(e){
+		var a = $(this).attr('href'), b = new RegExp('^/icons(/([a-z0-9-]+)?)?$', 'g');
+		if(a.match(b)){
+			e.preventDefault();
+			history.pushState({}, '', a);
+			wbIcons();
+			$('html, body').animate({
+				scrollTop: $('section#icon-sidebar').offset().top
+			}, 700);
+		}
+	}).on('keyup keydown mouseup mousedown click focus change', '.icon-search input#q', function(){
+		var a = $(this).val(), b = $('.icon-list ul li'), f = '#icon-sidebar ul li a.active', g = new RegExp('^/icons/([a-z0-9\\-]+)$', 'g'), e = window.location.pathname.substring(1);
+		if($(f).length == 1){
+			if($(f).attr('href').match(g)){
+				var h = new RegExp('^/icons/([a-z0-9\\-]+)$', 'm'), j = $(f).attr('href').match(h);
+				b = $('.icon-list ul li.icon-item-'+j[1]);
+			}
+		}
+		if(a == ''){
+			b.show();
+			if(e.match(/^icons(\\/)?$/g)){
+				$('section#icon-content ul li.icon-item-new').hide();
+			}
+		} else {
+			b.each(function(){
+				var c = $(this).children('.icon-name').text(), d = new RegExp(a, 'g');
+				if($(this).hasClass('icon-item-new') && (e.match(/^icons\\/^(new)$/g) || e.match(/^icons(\\/)?$/g))){
+					$(this).hide();
+				} else if(c.match(d)){
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
+		}
+	}).on('click', '.icon-list ul li', function(){
+		$('.window').remove();
+		var a = $(this).children('.icon-name').text(), b = '<div class="window-icon-box">', c = [64, 48, 32, 24, 16];
+		for(var i=0; i<c.length; i++){
+			b += '<div class="icon-box-size"><i class="wbi wbi-'+a+'" style="font-size: '+c[i]+'px;"></i></div>';
+		}
+		b += '</div><div class="window-icon-copas"><p>Copy icon & paste into design:</p><ul><li><i class="wbi wbi-'+a+'"></i></li><li>'+a+'</li></ul></div><div class="window-icon-code">'.htmlentities('<i class="').'<span class="code-class">wbi wbi-'+a+'</span>'.htmlentities('"></i>').'</div>';
+		$('body').append('<div class="window window-icon"><div class="window-bg"></div><div class="window-box">'+b+'</div></div>');
+	}).on('click', '.window-bg', function(){
+		$('.window').remove();
+	}).on('click', '.window-icon-code', function(){
+		var a = $(this).text();
+		if($('.rmm').length == 0){
+			navigator.clipboard.writeText(a).then(function(){
+				$('.window-icon-code').append('<span class="rmm">Copied</span>');
+				setTimeout(function(){
+					$('.rmm').remove();
+				}, 2000);
+			}, function(){
+				
+			});
+		}
 	});
 });
 function AX(){
@@ -163,6 +222,44 @@ function AZ(a = ''){
 		for(var i=0; i<a.length; i++){
 			$(a[i]).attr(b);
 		}
+	}
+}
+
+function wbIcons(){
+	var a = '<section id="icon-content"><div class="icon-search"><input type="text" id="q" class="text" placeholder="Search Icon" /><i class="wbi wbi-search"></i></div><div class="icon-list"><ul>', d = '<li class="icon-group icon-group-all"><a href="/icons">All</a></li>', e = window.location.pathname.substring(1), j = false;
+	for(var i=0; i<__iconGroup.length; i++){
+		var b = __iconGroup[i];
+		d += '<li class="icon-group icon-group-'+b+'"><a href="/icons/'+b+'">'+__icon[b][0]+'</a></li>';
+		for(var iX=0; iX<__icon[b][1].length; iX++){
+			var c = __icon[b][1][iX];
+			a += '<li class="icon-item icon-item-'+b+'"><div class="icon-box"><i class="wbi wbi-'+c+'"></i></div><div class="icon-name">'+c+'</div></li>';
+		}
+	}
+	a += '</ul></div></section><section id="icon-sidebar" class="icon-sidebar"><ul>'+d+'</ul></section>';
+	$('main').html('<div class="container">'+a+'</div>');
+	AZ('.icon-search input#q');
+	if(e.match(/^icons\\/([a-z0-9\\-]+)$/g)){
+		var f = e.match(/^icons\\/([a-z0-9\\-]+)$/m)[1];
+		if(AY(f, __iconGroup)){
+			var g = f;
+		}
+	}
+	if(typeof g == 'string'){
+		$('section#icon-sidebar ul li').each(function(){
+			var b = $(this).children('a'), h = b.attr('href');
+			if(h == '/icons/'+g){
+				b.addClass('active');
+				j = true;
+			}
+		});
+	}
+	if(j){
+		$('section#icon-content ul li').hide();
+		$('section#icon-content ul li.icon-item-'+g).show();
+	} else {
+		$('section#icon-content ul li').show();
+		$('section#icon-content ul li.icon-item-new').hide();
+		$('section#icon-sidebar ul li:first-child').children('a').addClass('active');
 	}
 }</script>
 
