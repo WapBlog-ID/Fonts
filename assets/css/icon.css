@@ -69,7 +69,7 @@ nav a.active:after {
 .navbar-brand a[href^=https] {
   width: 150px;
   height: 48px;
-  background-image: url(../../img/wblogo/wblogo-red-500.png);
+  background-image: url(../img/wblogo/wblogo-red-500.png);
   background-size: auto 40px;
   background-repeat: no-repeat;
   background-position: center;
