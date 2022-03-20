@@ -33,6 +33,69 @@
 <nav id="navbar">
 
 <div class="container">
+  
+  </main>
+
+<footer>
+
+<div class="copy"><div class="container">&copy; 2022 <a href="/icons">WapBlog.ID</a></div></div>
+
+</footer>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'/>
+
+<script>var __WB = $(document), __aX = window.location.pathname.substring(1);
+__WB.ready(function(){
+	AX();
+	__WB.on('click', 'a.nv-menu[data-menu]', function(){
+		var a = $(this).attr('data-menu');
+		if($('ul.menu-'+a).hasClass('menu-active')){
+			$('ul.menu-'+a).removeClass('menu-active');
+		} else {
+			$('ul.menu-'+a).addClass('menu-active');
+		}
+	}).on('click', 'a.close-nav', function(){
+		$('ul.menu-main, ul.menu-user').removeClass('menu-active');
+	});
+});
+function AX(){
+	$('.navbar-menu ul.menu-main li').each(function(i){
+		var a = $(this).children('a').attr('href');
+		if(a == __aX){
+			$(this).children('a').attr('class', 'active');
+		} else if(__aX == 'index' && i == 0){
+			$(this).children('a').attr('class', 'active');
+		}
+	});
+}
+function AY(a, b = []){
+	if(typeof b == 'object' && b.length > 0){
+		for(var i=0; i<b.length; i++){
+			if(b[i] == a){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+function AZ(a = ''){
+	var b = {'autocomplete': 'off', 'spellcheck': 'false'};
+	if(typeof a == 'string'){
+		if(a == ''){
+			$('form').attr(b);
+		} else {
+			$(a).attr(b);
+		}
+	} else if(typeof a == 'object' && a.length > 0){
+		for(var i=0; i<a.length; i++){
+			$(a[i]).attr(b);
+		}
+	}
+}</script>
+
+</body>
+
+</html>
 
 <div class="navbar-brand">
 
