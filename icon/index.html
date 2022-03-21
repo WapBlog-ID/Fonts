@@ -140,7 +140,7 @@ __WB.ready(function(){
 		} else {
 			b.each(function(){
 				var c = $(this).children('.icon-name').text(), d = new RegExp(a, 'g');
-				if($(this).hasClass('icon-item-new') && (e.match(/^icon/#^(new)$/g) || e.match(/^icon/#([W-]+)?$/g))){
+				if($(this).hasClass('icon-item-new') && (e.match(/^icon\/#^(new)$/g) || e.match(/^icon\/#([W-]+)?$/g))){
 					$(this).hide();
 				} else if(c.match(d)){
 					$(this).show();
