@@ -229,7 +229,7 @@ function wbIcons(){
 	var a = '<section id="icon-content"><div class="icon-search"><input type="text" id="q" class="text" placeholder="Search Icon" /><i class="wbi wbi-search"></i></div><div class="icon-list"><ul>', d = '<li class="icon-group icon-group-all"><a href="/icons">All</a></li>', e = window.location.pathname.substring(1), j = false;
 	for(var i=0; i<__iconGroup.length; i++){
 		var b = __iconGroup[i];
-		d += '<li class="icon-group icon-group-'+b+'"><a href="/icons/'+b+'">'+__icon[b][0]+'</a></li>';
+		d += '<li class="icon-group icon-group-'+b+'"><a href="/icon#'+b+'">'+__icon[b][0]+'</a></li>';
 		for(var iX=0; iX<__icon[b][1].length; iX++){
 			var c = __icon[b][1][iX];
 			a += '<li class="icon-item icon-item-'+b+'"><div class="icon-box"><i class="wbi wbi-'+c+'"></i></div><div class="icon-name">'+c+'</div></li>';
@@ -239,7 +239,7 @@ function wbIcons(){
 	$('main').html('<div class="container">'+a+'</div>');
 	AZ('.icon-search input#q');
 	if(e.match(/^icons\\/([a-z0-9\\-]+)$/g)){
-		var f = e.match(/^icons\\/([a-z0-9\\-]+)$/m)[1];
+		var f = e.match(/^icon#([a-z0-9\\-]+)$/m)[1];
 		if(AY(f, __iconGroup)){
 			var g = f;
 		}
@@ -247,7 +247,7 @@ function wbIcons(){
 	if(typeof g == 'string'){
 		$('section#icon-sidebar ul li').each(function(){
 			var b = $(this).children('a'), h = b.attr('href');
-			if(h == '/icons/'+g){
+			if(h == '/icon#'+g){
 				b.addClass('active');
 				j = true;
 			}
