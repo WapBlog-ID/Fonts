@@ -125,22 +125,22 @@ __WB.ready(function(){
 			}, 700);
 		}
 	}).on('keyup keydown mouseup mousedown click focus change', '.icon-search input#q', function(){
-		var a = $(this).val(), b = $('.icon-list ul li'), f = '#icon-sidebar ul li a.active', g = new RegExp('^/icons/([a-z0-9\\-]+)$', 'g'), e = window.location.pathname.substring(1);
+		var a = $(this).val(), b = $('.icon-list ul li'), f = '#icon-sidebar ul li a.active', g = new RegExp('^/icon#([a-z0-9-]+)$', 'g'), e = window.location.pathname.substring(1);
 		if($(f).length == 1){
 			if($(f).attr('href').match(g)){
-				var h = new RegExp('^/icons/([a-z0-9\\-]+)$', 'm'), j = $(f).attr('href').match(h);
+				var h = new RegExp('^/icon#([a-z0-9-]+)$', 'm'), j = $(f).attr('href').match(h);
 				b = $('.icon-list ul li.icon-item-'+j[1]);
 			}
 		}
 		if(a == ''){
 			b.show();
-			if(e.match(/^icons(\\/)?$/g)){
+			if(e.match(/^icon$/g)){
 				$('section#icon-content ul li.icon-item-new').hide();
 			}
 		} else {
 			b.each(function(){
 				var c = $(this).children('.icon-name').text(), d = new RegExp(a, 'g');
-				if($(this).hasClass('icon-item-new') && (e.match(/^icons\\/^(new)$/g) || e.match(/^icons(\\/)?$/g))){
+				if($(this).hasClass('icon-item-new') && (e.match(/^icon#^(new)$/g) || e.match(/^icon#([W-]+)?$/g))){
 					$(this).hide();
 				} else if(c.match(d)){
 					$(this).show();
@@ -221,8 +221,8 @@ function wbIcons(){
 	a += '</ul></div></section><section id="icon-sidebar" class="icon-sidebar"><ul>'+d+'</ul></section>';
 	$('main').html('<div class="container">'+a+'</div>');
 	AZ('.icon-search input#q');
-	if(e.match(/^icons\\/([a-z0-9\\-]+)$/g)){
-		var f = e.match(/^icon#([a-z0-9\\-]+)$/m)[1];
+	if(e.match(/^icon#([a-z0-9\-]+)$/g)){
+		var f = e.match(/^icon#([a-z0-9\-]+)$/m)[1];
 		if(AY(f, __iconGroup)){
 			var g = f;
 		}
