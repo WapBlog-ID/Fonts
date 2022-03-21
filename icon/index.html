@@ -221,7 +221,7 @@ function wbIcons(){
 	a += '</ul></div></section><section id="icon-sidebar" class="icon-sidebar"><ul>'+d+'</ul></section>';
 	$('main').html('<div class="container">'+a+'</div>');
 	AZ('.icon-search input#q');
-	if(e.match(/^icon/#([a-z0-9\-]+)$/g)){
+	if(e.match(/^icon\/#([a-z0-9\-]+)$/g)){
 		var f = e.match(/^icon/#([a-z0-9\-]+)$/m)[1];
 		if(AY(f, __iconGroup)){
 			var g = f;
