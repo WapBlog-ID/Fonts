@@ -155,7 +155,7 @@ __WB.ready(function(){
 		for(var i=0; i<c.length; i++){
 			b += '<div class="icon-box-size"><i class="wbi wbi-'+a+'" style="font-size: '+c[i]+'px;"></i></div>';
 		}
-		b += '</div><div class="window-icon-copas"><p>Copy icon & paste into design:</p><ul><li><i class="wbi wbi-'+a+'"></i></li><li>'+a+'</li></ul></div><div class="window-icon-code">'.htmlentities('<i class="').'<span class="code-class">wbi wbi-'+a+'</span>'.htmlentities('"></i>').'</div>';
+		b += '</div><div class="window-icon-copas"><p>Copy icon & paste into design:</p><ul><li><i class="wbi wbi-'+a+'"></i></li><li>'+a+'</li></ul></div><div class="window-icon-code">&laquo;i class=&quot;<span class="code-class">wbi wbi-'+a+'</span>&quot;&laquo;&raquo;/i&laquo</div>';
 		$('body').append('<div class="window window-icon"><div class="window-bg"></div><div class="window-box">'+b+'</div></div>');
 	}).on('click', '.window-bg', function(){
 		$('.window').remove();
